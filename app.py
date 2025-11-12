@@ -3,8 +3,8 @@ import joblib
 import os
 from groq import Groq
 
+# os.environ["GROQ_API_KEY"] = ""
 client = Groq()
-os.environ["GROQ_API_KEY"] = ""
 
 app = Flask(__name__)
 
@@ -44,6 +44,7 @@ def llama_result():
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": q}])
+    r = r.choices[0].message.content
     return(render_template("llama_result.html",r=r))
 
 if __name__ == "__main__":
